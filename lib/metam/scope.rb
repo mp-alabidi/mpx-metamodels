@@ -18,7 +18,7 @@ module Metam
     def initialize_klass(xml_element)
       klass_name = xml_element.xpath('name').text
       klass = Metam::Klass.new(klass_name, xml_element)
-      
+
       @klasses[klass_name] = klass
     end
 

@@ -12,4 +12,3 @@ describe Metam::Store do
     expect(@store.scope('affiliation1')).to be_a(Metam::Scope)
   end
 end
-

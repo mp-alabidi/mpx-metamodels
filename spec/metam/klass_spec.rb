@@ -13,9 +13,15 @@ describe Metam::Klass do
       @klass = @scope.klass('User')
     end
 
-    describe '#attributes' do
+    describe '#attribute_names' do
       it 'returns :name, :familyname' do
-        expect(@klass.attributes).to eq(['name', 'familyname'])
+        expect(@klass.attribute_names).to eq(%w(name familyname))
+      end
+    end
+
+    describe '#attribute' do
+      it 'returns an attribute instance' do
+        expect(@klass.attribute('name')).to be_a(Metam::Attribute)
       end
     end
   end

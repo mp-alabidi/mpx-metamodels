@@ -3,41 +3,37 @@
 <root>
   <model>
     <name>Company</name>
-    <attributes>
-      <attribute>
-        <title>Country</title>
-        <validators>
-          <presence>true</presence>
-          <datatype>string</datatype>
-          <length>30</length>
-        </validators>
-      </attribute>
-      <attribute>
-        <title>Nickname</title>
-        <validators>
-          <presence>false</presence>
-          <datatype>string</datatype>
-        </validators>
-      </attribute>
-    </attributes>
+    <attribute>
+      <title>Country</title>
+      <validators>
+        <presence>true</presence>
+        <datatype>string</datatype>
+        <length>30</length>
+      </validators>
+    </attribute>
+    <attribute>
+      <title>Nickname</title>
+      <validators>
+        <presence>false</presence>
+        <datatype>string</datatype>
+      </validators>
+    </attribute>
   </model>
   <model>
     <name>User</name>
-    <attributes>
-      <attribute>
-        <title>Name</title>
-        <validators>
-          <presence>true</presence>
-          <datatype>string</datatype>
-        </validators>
-      </attribute>
-      <attribute>
-        <title>familyname</title>
-        <validators>
-          <presence>false</presence>
-          <datatype>string</datatype>
-        </validators>
-      </attribute>
-    </attributes>
+    <attribute>
+      <title>Name</title>
+      <validators>
+        <presence>true</presence>
+        <datatype>string</datatype>
+      </validators>
+    </attribute>
+    <attribute>
+      <title>familyname</title>
+      <validators>
+        <presence>false</presence>
+        <datatype>string</datatype>
+      </validators>
+    </attribute>
   </model>
 </root>

@@ -7,14 +7,14 @@ module Metam
       @xml  = xml_element
       @attributes = {}
 
-      @xml.xpath('attributes/attribute').each do |el|
+      @xml.xpath('attribute').each do |el|
         initialize_attribute(el)
       end
     end
 
     def initialize_attribute(xml_element)
       attr_name        = xml_element.xpath('title').text.downcase
-      attr_validations = xml_element.xpath('validators/*').inject({}) do |hsh, validation| 
+      attr_validations = xml_element.xpath('validators/*').reduce({}) do |hsh, validation|
         hsh.update(validation.name => validation.text)
       end
 
@@ -25,17 +25,12 @@ module Metam
       @attributes[attribute_name.to_s]
     end
 
-    def attributes
+    def attribute_names
       @attributes.keys
     end
-  end
 
-  class Attribute
-    attr_reader :name, :validations
-
-    def initialize(name, validations)
-      @name = name
-      @validations = validations
-    end 
+    def attributes
+      @attributes.values
+    end
   end
 end
