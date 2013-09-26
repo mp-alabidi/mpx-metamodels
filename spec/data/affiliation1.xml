@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--Document created by: , with XmlGrid Online XML Editor,http://xmlgrid.net -->
+<root>
+  <model>
+    <name>Company</name>
+    <attributes>
+      <attribute>
+        <title>Country</title>
+        <validators>
+          <presence>true</presence>
+          <datatype>string</datatype>
+          <length>30</length>
+        </validators>
+      </attribute>
+      <attribute>
+        <title>Nickname</title>
+        <validators>
+          <presence>false</presence>
+          <datatype>string</datatype>
+        </validators>
+      </attribute>
+    </attributes>
+  </model>
+  <model>
+    <name>User</name>
+    <attributes>
+      <attribute>
+        <title>Name</title>
+        <validators>
+          <presence>true</presence>
+          <datatype>string</datatype>
+        </validators>
+      </attribute>
+      <attribute>
+        <title>familyname</title>
+        <validators>
+          <presence>false</presence>
+          <datatype>string</datatype>
+        </validators>
+      </attribute>
+    </attributes>
+  </model>
+</root>
