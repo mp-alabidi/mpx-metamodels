@@ -1,5 +1,4 @@
 # encoding: utf-8
-require 'singleton'
 require 'nokogiri'
 
 module Metam
