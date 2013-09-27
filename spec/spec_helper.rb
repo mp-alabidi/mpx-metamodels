@@ -4,9 +4,24 @@ $LOAD_PATH.unshift(File.join(File.dirname(__FILE__), '..', 'lib'))
 $LOAD_PATH.unshift(File.dirname(__FILE__))
 
 require 'rspec'
+require 'active_record'
 require 'metam'
 
 Metam.data_dir = File.join(File.dirname(__FILE__), 'data')
+
+ActiveRecord::Base.establish_connection(
+  adapter: 'sqlite3',
+  database: ':memory:'
+)
+
+ActiveRecord::Schema.define do
+  self.verbose = false
+
+  create_table :users, force: true do |t|
+    t.text :metadata
+    t.string :affiliation, default: 'affiliation1'
+  end
+end
 
 RSpec.configure do |config|
   config.treat_symbols_as_metadata_keys_with_true_values = true

@@ -9,3 +9,9 @@ end
 module Metam
   mattr_accessor :data_dir
 end
+
+if defined? ActiveRecord::Base
+  ActiveRecord::Base.class_eval do
+    include Metam::Activerecord::Model
+  end
+end

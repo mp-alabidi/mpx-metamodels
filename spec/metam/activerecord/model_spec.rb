@@ -1,0 +1,63 @@
+# encoding: utf-8
+
+require 'spec_helper'
+require 'support/activerecord/user'
+
+describe Metam::Activerecord::Model do
+
+  before(:each) do
+    @user = Support::Activerecord::User.new
+  end
+
+  it 'responds to :affiliation' do
+    expect(@user).to respond_to(:affiliation)
+  end
+
+  it 's default affiliation is affiliation1' do
+    expect(@user.affiliation).to eq('affiliation1')
+  end
+
+  describe '#metamodel_klass' do
+    it 'returns the metamodel klass definition' do
+      expect(@user.metamodel_klass).to be_a(Metam::Klass)
+    end
+  end
+
+  describe '#metamodel_scope' do
+    it 'returns affiliation1' do
+      expect(@user.metamodel_scope).to eq('affiliation1')
+    end
+  end
+
+  describe 'setters/getters' do
+
+    it 'responds to :name' do
+      expect(@user).to respond_to(:name)
+    end
+
+    it 'returns the name' do
+      @user.metadata['name'] = 'john'
+      expect(@user.name).to eq('john')
+    end
+
+    it 'sets the name' do
+      expect do
+        @user.name = 'john'
+      end.not_to raise_error
+
+      expect(@user.name).to eq('john')
+    end
+
+    it 'initializes the instance with the given metadata values' do
+      user = Support::Activerecord::User.new(name: 'amine')
+
+      expect(user.name).to eq('amine')
+    end
+
+    it 'fails if scope is not available' do
+      expect do
+        Support::Activerecord::User.new(affiliation: nil, name: 'foo')
+      end.to raise_error(Metam::Exceptions::UnknownScope)
+    end
+  end
+end

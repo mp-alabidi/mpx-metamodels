@@ -12,6 +12,8 @@ module Metam
       @xml.xpath('/root/model').each do |el|
         initialize_klass(el)
       end
+    rescue
+      raise Metam::Exceptions::UnknownScope, "scope unknown: #{scope_name}"
     end
 
     def initialize_klass(xml_element)
