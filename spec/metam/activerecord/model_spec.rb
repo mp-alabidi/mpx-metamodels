@@ -60,4 +60,25 @@ describe Metam::Activerecord::Model do
       end.to raise_error(Metam::Exceptions::UnknownScope)
     end
   end
+
+  describe 'validations' do
+    it 'should call meta validations' do
+      expect(@user).to receive(:metadata_validate)
+      @user.valid?
+    end
+
+    it 'initializes required validations' do
+      validation = double('validation', perform: true)
+      expect(Metam::Validation::Presence).to receive(:new).and_return(validation).at_least(:once)
+      expect(Metam::Validation::Datatype).to receive(:new).and_return(validation).at_least(:once)
+
+      @user.valid?
+    end
+
+    # TODO: be more specific here...
+    it 'should be invalid' do
+      @user.name = ''
+      expect(@user.valid?).to be_false
+    end
+  end
 end

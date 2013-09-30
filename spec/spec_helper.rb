@@ -21,6 +21,9 @@ ActiveRecord::Schema.define do
     t.text :metadata
     t.string :affiliation, default: 'affiliation1'
   end
+
+  create_table :foos, force: true do |t|
+  end
 end
 
 RSpec.configure do |config|

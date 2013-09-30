@@ -11,7 +11,5 @@ module Metam
 end
 
 if defined? ActiveRecord::Base
-  ActiveRecord::Base.class_eval do
-    include Metam::Activerecord::Model
-  end
+  ActiveRecord::Base.send(:extend, Metam::Activerecord::Model::ClassMethods)
 end
