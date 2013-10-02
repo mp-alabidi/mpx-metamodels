@@ -3,6 +3,7 @@ require 'nokogiri'
 
 module Metam
 
+  # This class defines a scope of
   class Scope
     def initialize(scope_name)
       @klasses  = {}

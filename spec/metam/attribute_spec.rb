@@ -15,7 +15,10 @@ describe Metam::Attribute do
 
       hsh = {
         'presence' => 'true',
-        'datatype' => 'string'
+        'datatype' => 'string',
+        'minlength' => '2',
+        'maxlength' => '30'
+
       }
 
       expect(attribute.validations).to eq(hsh)

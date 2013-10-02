@@ -26,6 +26,8 @@
       <validators>
         <presence>true</presence>
         <datatype>string</datatype>
+        <minlength>2</min-length>
+        <maxlength>30</max-length>
       </validators>
     </attribute>
     <attribute>
@@ -33,6 +35,62 @@
       <validators>
         <presence>false</presence>
         <datatype>string</datatype>
+      </validators>
+    </attribute>
+    <attribute>
+      <title>birthdate</title>
+      <validators>
+        <presence>true</presence>
+        <datatype>date</datatype>
+      </validators>
+    </attribute>
+    <attribute>
+      <title>time</title>
+      <validators>
+        <presence>true</presence>
+        <datatype>datetime</datatype>
+      </validators>
+    </attribute>
+    <attribute>
+      <title>email</title>
+      <validators>
+        <presence>true</presence>
+        <datatype>email</datatype>
+      </validators>
+    </attribute>
+    <attribute>
+      <title>zip_code</title>
+      <validators>
+        <presence>true</presence>
+        <datatype>integer</datatype>
+      </validators>
+    </attribute>
+    <attribute>
+      <title>ratio</title>
+      <validators>
+        <presence>true</presence>
+        <datatype>float</datatype>
+      </validators>
+    </attribute>
+    <attribute>
+      <title>telephone</title>
+      <validators>
+        <presence>true</presence>
+        <datatype>telephone</datatype>
+      </validators>
+    </attribute>
+    <attribute>
+      <title>website</title>
+      <validators>
+        <presence>true</presence>
+        <datatype>url</datatype>
+      </validators>
+    </attribute>
+    <attribute>
+      <title>distribution_share</title>
+      <validators>
+        <presence>true</presence>
+        <datatype>percentage</datatype>
       </validators>
     </attribute>
   </model>

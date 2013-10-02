@@ -1,20 +1,25 @@
 # Metam
 
-TODO: Write a gem description
+Metam is a gem that extends a Model with dynamic attributes and validators during runtime.
 
 ## Installation
 
 Add this line to your application's Gemfile:
 
-    gem 'metam'
+```ruby
+gem 'metam'
+```
 
 And then execute:
 
-    $ bundle
+```ruby
+$ bundle
+```
 
-Or install it yourself as:
-
-    $ gem install metam
+<!-- Or install it yourself as:
+```ruby
+$ gem install metam
+``` -->
 
 ## Usage
 

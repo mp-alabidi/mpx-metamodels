@@ -1,6 +1,8 @@
 # encoding: utf-8
 
 module Metam
+
+  # This class is used to store the
   class Klass
     def initialize(klass_name, xml_element)
       @name = klass_name
