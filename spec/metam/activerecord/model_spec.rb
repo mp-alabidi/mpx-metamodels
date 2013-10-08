@@ -54,6 +54,12 @@ describe Metam::Activerecord::Model do
       expect(user.name).to eq('amine')
     end
 
+    it 'fails if scope is not valid' do
+      expect do
+        Support::Activerecord::User.new(affiliation: 'affiliation1_faulty', name: 'foo')
+      end.to raise_error(Metam::Exceptions::InvalidXML)
+    end
+
     it 'fails if scope is not available' do
       expect do
         Support::Activerecord::User.new(affiliation: nil, name: 'foo')

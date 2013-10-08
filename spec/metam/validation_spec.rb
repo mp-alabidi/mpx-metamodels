@@ -7,7 +7,7 @@ describe Metam::Validation::Core do
   before(:each) do
     @user = double(
       'user',
-      name: 'john',
+      name: 'johnhaveareallylongname',
       familyname: 'doe',
       birthdate: '05/07/1985',
       time: '12:00:01',
@@ -29,11 +29,11 @@ describe Metam::Validation::Core do
     end
 
     it 'calls .build for all validations' do
-      # 2 validations on name: presence, type
-      # 2 validations on familyname: presence, type
+      # 4 validations on name: presence, type, maxlength, minlength
+      # 4 validations on each other attribute: presence, datatype, maxlength, minlength
       validation = double('validation', perform: true)
 
-      expect(Metam::Validation::Core).to receive(:build).exactly(22).times.and_return(validation)
+      expect(Metam::Validation::Core).to receive(:build).exactly(24).times.and_return(validation)
       Metam::Validation::Core.validate(@klass, @user)
     end
   end
@@ -82,6 +82,7 @@ describe Metam::Validation::Datatype do
     it 'should pass' do
       instance = double('user', name: 1234)
       validation = Metam::Validation::Datatype.new(instance, 'name', 'string')
+
       expect(validation).to receive(:failed).with(:invalid_datatype_string)
       validation.perform
     end
@@ -89,6 +90,7 @@ describe Metam::Validation::Datatype do
     it 'should fail' do
       instance = double('user', name: 'john')
       validation = Metam::Validation::Datatype.new(instance, 'name', 'string')
+
       expect(validation).not_to receive(:failed)
       validation.perform
     end
@@ -240,10 +242,11 @@ describe Metam::Validation::Datatype do
 end
 
 describe Metam::Validation::Maxlength do
-  describe 'maximum length validation' do
-    it 'should fail' do
-      instance = double()
-      expect(true).to be(true)
-    end
+  it 'should fail' do
+    instance = double('user', familyname: 'abidi', maxlength: '30')
+    validation = Metam::Validation::Maxlength.new(instance, 'familyname', '30')
+
+    expect(validation).to receive(:failed).with(:invalid_maxlength)
+    validation.perform
   end
 end

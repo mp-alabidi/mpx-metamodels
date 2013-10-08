@@ -7,7 +7,7 @@ Dir.glob(File.join(File.expand_path(File.dirname(__FILE__)), 'metam/**/*')).each
 end
 
 module Metam
-  mattr_accessor :data_dir
+  mattr_accessor :data_dir, :schema
 end
 
 if defined? ActiveRecord::Base

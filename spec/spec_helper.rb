@@ -8,6 +8,7 @@ require 'active_record'
 require 'metam'
 
 Metam.data_dir = File.join(File.dirname(__FILE__), 'data')
+Metam.schema = File.join(Metam.data_dir, 'schema1.xsd')
 
 ActiveRecord::Base.establish_connection(
   adapter: 'sqlite3',

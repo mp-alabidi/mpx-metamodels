@@ -113,7 +113,7 @@ module Metam
 
     class Maxlength < Core
       def perform
-        #return false unless @setting.to_s.length
+        failed(:invalid_maxlength) if @setting.to_i < val.to_s.length
       end
     end
   end

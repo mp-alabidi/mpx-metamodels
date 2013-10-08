@@ -16,8 +16,8 @@ describe Metam::Attribute do
       hsh = {
         'presence' => 'true',
         'datatype' => 'string',
-        'minlength' => '2',
-        'maxlength' => '30'
+        'maxlength' => '10',
+        'minlength' => '2'
 
       }
 

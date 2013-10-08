@@ -9,6 +9,7 @@
         <datatype>string</datatype>
         <maxlength>10</maxlength>
         <minlength>2</minlength>
+        <wrong>validator</wrong><!-- an additonal validator that do not comply with the XSD Schema for the document, to provoque error -->
       </validators>
     </attribute>
     <attribute>
@@ -16,8 +17,6 @@
       <validators>
         <presence>false</presence>
         <datatype>string</datatype>
-        <maxlength>30</maxlength>
-        <minlength>2</minlength>
       </validators>
     </attribute>
     <attribute>

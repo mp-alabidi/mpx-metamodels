@@ -7,5 +7,11 @@ module Metam
     # Handling exceptions related to missed {Metam::Scope}
     class UnknownScope < ::Exception
     end
+
+    class UnknownSchema < ::Exception
+    end
+
+    class InvalidXML < ::Exception
+    end
   end
 end
