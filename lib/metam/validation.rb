@@ -106,15 +106,16 @@ module Metam
       end
     end
 
+    class Maxlength < Core
+      def perform
+        failed(:invalid_maxlength) if val.to_s.length > @setting.to_i
+      end
+    end
+
     class Minlength < Core
       def perform
       end
     end
 
-    class Maxlength < Core
-      def perform
-        failed(:invalid_maxlength) if @setting.to_i < val.to_s.length
-      end
-    end
   end
 end

@@ -7,8 +7,8 @@ describe Metam::Validation::Core do
   before(:each) do
     @user = double(
       'user',
-      name: 'johnhaveareallylongname',
-      familyname: 'doe',
+      name: 'john',
+      familyname: 'qodiztxcjqzfzwajpznwqodiztxcjqzfzwajpznw',
       birthdate: '05/07/1985',
       time: '12:00:01',
       email: 'john@doe.com',
@@ -243,7 +243,7 @@ end
 
 describe Metam::Validation::Maxlength do
   it 'should fail' do
-    instance = double('user', familyname: 'abidi', maxlength: '30')
+    instance = double('user', familyname: 'uvrxcwgojqymmuekvgpqqodiztxcjqzfzwajpznw')
     validation = Metam::Validation::Maxlength.new(instance, 'familyname', '30')
 
     expect(validation).to receive(:failed).with(:invalid_maxlength)
