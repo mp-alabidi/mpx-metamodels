@@ -69,6 +69,11 @@ module Metam
       end
     end
 
+    #
+    # [ class description]
+    #
+    # @author [author]
+    #
     class Datatype < Core
       def perform
         case @setting
@@ -106,14 +111,25 @@ module Metam
       end
     end
 
+    #
+    # [ class description]
+    #
+    # @author [author]
+    #
     class Maxlength < Core
       def perform
         failed(:invalid_maxlength) if val.to_s.length > @setting.to_i
       end
     end
 
+    #
+    # [ class description]
+    #
+    # @author [author]
+    #
     class Minlength < Core
       def perform
+        failed(:invalid_minlength) if val.to_s.length < @setting.to_i
       end
     end
 

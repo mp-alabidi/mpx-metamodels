@@ -23,6 +23,22 @@ describe Metam::Activerecord::Model do
     end
   end
 
+  context 'When scope is not available' do
+    it 'should fail' do
+      expect do
+        Support::Activerecord::User.new(affiliation: nil, name: 'foo')
+      end.to raise_error(Metam::Exceptions::UnknownScope)
+    end
+  end
+
+  context 'When scope is not valid' do
+    it 'should fail' do
+      expect do
+        Support::Activerecord::User.new(affiliation: 'affiliation1_faulty', name: 'foo')
+      end.to raise_error(Metam::Exceptions::InvalidXML)
+    end
+  end
+
   describe '#metamodel_scope' do
     it 'returns affiliation1' do
       expect(@user.metamodel_scope).to eq('affiliation1')
@@ -52,18 +68,6 @@ describe Metam::Activerecord::Model do
       user = Support::Activerecord::User.new(name: 'amine')
 
       expect(user.name).to eq('amine')
-    end
-
-    it 'fails if scope is not valid' do
-      expect do
-        Support::Activerecord::User.new(affiliation: 'affiliation1_faulty', name: 'foo')
-      end.to raise_error(Metam::Exceptions::InvalidXML)
-    end
-
-    it 'fails if scope is not available' do
-      expect do
-        Support::Activerecord::User.new(affiliation: nil, name: 'foo')
-      end.to raise_error(Metam::Exceptions::UnknownScope)
     end
   end
 

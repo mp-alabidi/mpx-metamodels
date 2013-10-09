@@ -3,7 +3,7 @@ require 'nokogiri'
 
 module Metam
 
-  # This class defines a scope of
+  # This class defines a scope
   class Scope
     attr_reader :xml, :klasses
     def initialize(scope_name)

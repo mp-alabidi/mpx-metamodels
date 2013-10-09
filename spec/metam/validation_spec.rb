@@ -8,7 +8,7 @@ describe Metam::Validation::Core do
     @user = double(
       'user',
       name: 'john',
-      familyname: 'qodiztxcjqzfzwajpznwqodiztxcjqzfzwajpznw',
+      familyname: 'doe',
       birthdate: '05/07/1985',
       time: '12:00:01',
       email: 'john@doe.com',
@@ -247,6 +247,32 @@ describe Metam::Validation::Maxlength do
     validation = Metam::Validation::Maxlength.new(instance, 'familyname', '30')
 
     expect(validation).to receive(:failed).with(:invalid_maxlength)
+    validation.perform
+  end
+
+  it 'should pass' do
+    instance = double('user', familyname: 'doe')
+    validation = Metam::Validation::Maxlength.new(instance, 'familyname', '30')
+
+    expect(validation).not_to receive(:failed)
+    validation.perform
+  end
+end
+
+describe Metam::Validation::Minlength do
+  it 'should fail' do
+    instance = double('user', familyname: 'a')
+    validation = Metam::Validation::Minlength.new(instance, 'familyname', '2')
+
+    expect(validation).to receive(:failed).with(:invalid_minlength)
+    validation.perform
+  end
+
+  it 'should pass' do
+    instance = double('user', familyname: 'abidi')
+    validation = Metam::Validation::Minlength.new(instance, 'familyname', '2')
+
+    expect(validation).not_to receive(:failed)
     validation.perform
   end
 end
