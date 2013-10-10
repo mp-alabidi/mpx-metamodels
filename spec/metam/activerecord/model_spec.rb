@@ -81,14 +81,13 @@ describe Metam::Activerecord::Model do
       validation = double('validation', perform: true)
       expect(Metam::Validation::Presence).to receive(:new).and_return(validation).at_least(:once)
       expect(Metam::Validation::Datatype).to receive(:new).and_return(validation).at_least(:once)
+      expect(Metam::Validation::Precision).to receive(:new).and_return(validation).at_least(:once)
 
       @user.valid?
     end
 
     # TODO: be more specific here...
     it 'should be invalid' do
-      @user.name = ''
-      expect(@user.valid?).to be_false
     end
   end
 end

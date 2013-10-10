@@ -75,39 +75,58 @@ module Metam
     # @author [author]
     #
     class Datatype < Core
+
       def perform
-        case @setting
-        when 'string'
-          failed(:invalid_datatype_string) unless val.is_a?(String)
-        when 'url'
-          failed(:invalid_datatype_url) unless val =~ /^#{URI.regexp}$/
-        when 'email'
-          failed(:invalid_datatype_email) unless val =~ /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i
-        when 'integer'
-          failed(:invalid_datatype_integer) unless val.is_a?(Integer)
-        when 'float'
-          failed(:invalid_datatype_float) unless val =~ /\A\d+\.\d+$/
-        when 'date'
-          failed(:invalid_datatype_date) unless begin
+        send "validate_#{@setting}", val
+      end
+
+      def validate_string(val)
+        failed(:invalid_datatype_string) unless val.is_a?(String)
+      end
+
+      def validate_url(val)
+        failed(:invalid_datatype_url) unless val =~ /^#{URI.regexp}$/
+      end
+
+      def validate_email(val)
+        failed(:invalid_datatype_email) unless val =~ /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i
+      end
+
+      def validate_integer(val)
+        failed(:invalid_datatype_integer) unless val.is_a?(Integer)
+      end
+
+      def validate_float(val)
+        failed(:invalid_datatype_float) unless val =~ /\A\d+\.\d+$/
+      end
+
+      def validate_date(val)
+        failed(:invalid_datatype_date) unless begin
                                                   Date.parse(val)
                                                 rescue
                                                   false
                                                 end
-        when 'datetime'
-          failed(:invalid_datatype_datetime) unless begin
+      end
+
+      def validate_datetime(val)
+        failed(:invalid_datatype_datetime) unless begin
                                                   DateTime.parse(val)
                                                 rescue
                                                   false
                                                 end
-        when 'telephone'
-          failed(:invalid_datatype_telephone) unless val =~ /\A^\+[0-9]{6,}$/
-        when 'percentage'
-          failed(:invalid_datatype_percentage) unless val =~ /\A[0-9]{1,3}$/ && val.to_i.between?(0, 100)
-        # TODO: Array Validation
-        # when 'array'
-        #   failed(:invalid) unless
-        # else
-        end
+      end
+
+      def validate_telephone(val)
+        failed(:invalid_datatype_telephone) unless val =~ /\A^\+[0-9]{6,}$/
+      end
+
+      def validate_percentage(val)
+        failed(:invalid_datatype_percentage) unless val =~ /\A[0-9]{1,3}$/ && val.to_i.between?(0, 100)
+      end
+
+      def validate_multiple(val)
+        arr = val.to_s.split(',').map(&:strip)
+        failed(:invalid_multiple_values) if arr.empty?
       end
     end
 
@@ -130,6 +149,31 @@ module Metam
     class Minlength < Core
       def perform
         failed(:invalid_minlength) if val.to_s.length < @setting.to_i
+      end
+    end
+
+    #
+    # [ class description]
+    #
+    # @author [author]
+    #
+    class Precision < Core
+      def perform
+        unless val.nil?
+          precision = (val.to_s.split('.'))[1].length
+          failed(:invalid_floating_number_precision) if precision > @setting.to_i
+        end
+      end
+    end
+
+    #
+    # [ class description]
+    #
+    # @author [author]
+    #
+    class Maxvalues < Core
+      def perform
+        failed(:invalid_maximum_number_of_values) if val.to_s.split(',').map(&:strip).size > @setting.to_i
       end
     end
 

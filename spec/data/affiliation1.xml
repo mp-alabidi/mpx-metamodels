@@ -53,6 +53,7 @@
       <validators>
         <presence>true</presence>
         <datatype>float</datatype>
+        <precision>3</precision> <!-- precision express the number of digits after comma for datatype Float -->
       </validators>
     </attribute>
     <attribute>
@@ -74,6 +75,14 @@
       <validators>
         <presence>true</presence>
         <datatype>percentage</datatype>
+      </validators>
+    </attribute>
+    <attribute>
+      <title>content</title> <!-- Just a dummy example -->
+      <validators>
+        <presence>true</presence>
+        <datatype>multiple</datatype> <!-- For mutilple values attribtues such as arrays -->
+        <maxvalues>4</maxvalues> <!-- Expresses the maximum number of values permitted for this attribute -->
       </validators>
     </attribute>
   </model>

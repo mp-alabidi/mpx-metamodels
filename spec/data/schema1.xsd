@@ -17,6 +17,8 @@
                           <xs:element type="xs:string" name="datatype"/>
                           <xs:element type="xs:byte" name="maxlength" minOccurs="0"/>
                           <xs:element type="xs:byte" name="minlength" minOccurs="0"/>
+                          <xs:element type="xs:byte" name="precision" minOccurs="0"/>
+                          <xs:element type="xs:byte" name="maxvalues" minOccurs="0"/>
                         </xs:sequence>
                       </xs:complexType>
                     </xs:element>

@@ -14,8 +14,8 @@ describe Metam::Klass do
     end
 
     describe '#attribute_names' do
-      it 'returns :name, :familyname :birthdate :time :email :zip_code :ratio :telephone :website :distribution_share' do
-        expect(@klass.attribute_names).to eq(%w(name familyname birthdate time email zip_code ratio telephone website distribution_share))
+      it 'returns :name, :familyname :birthdate :time :email :zip_code :ratio :telephone :website :distribution_share :content' do
+        expect(@klass.attribute_names).to eq(%w(name familyname birthdate time email zip_code ratio telephone website distribution_share content))
       end
     end
 

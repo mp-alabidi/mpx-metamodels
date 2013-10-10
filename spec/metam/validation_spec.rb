@@ -13,10 +13,11 @@ describe Metam::Validation::Core do
       time: '12:00:01',
       email: 'john@doe.com',
       zip_code: 101_17, # TODO: change to string than cast to Integer
-      ratio: '14.1',
+      ratio: '14.111',
       telephone: '+49198873628',
       website: 'http://www.john.com/',
-      distribution_share: '90')
+      distribution_share: '90',
+      content: 'tic,tac,toe')
     @scope = Metam::Scope.new('affiliation1')
     @klass = @scope.klass('User')
   end
@@ -31,9 +32,10 @@ describe Metam::Validation::Core do
     it 'calls .build for all validations' do
       # 4 validations on name: presence, type, maxlength, minlength
       # 4 validations on each other attribute: presence, datatype, maxlength, minlength
+      # 3 validations on ratio: presence, type, precision
       validation = double('validation', perform: true)
 
-      expect(Metam::Validation::Core).to receive(:build).exactly(24).times.and_return(validation)
+      expect(Metam::Validation::Core).to receive(:build).exactly(28).times.and_return(validation)
       Metam::Validation::Core.validate(@klass, @user)
     end
   end
@@ -239,6 +241,24 @@ describe Metam::Validation::Datatype do
       validation.perform
     end
   end
+
+  describe 'datatype mutiple validation' do
+    it 'should fail' do
+      instance = double('user', content: '')
+      validation = Metam::Validation::Datatype.new(instance, 'content', 'multiple')
+
+      expect(validation).to receive(:failed).with(:invalid_multiple_values)
+      validation.perform
+    end
+
+    it 'should pass' do
+      instance = double('user', content: 'one, two')
+      validation = Metam::Validation::Datatype.new(instance, 'content', 'multiple')
+
+      expect(validation).not_to receive(:failed)
+      validation.perform
+    end
+  end
 end
 
 describe Metam::Validation::Maxlength do
@@ -273,6 +293,42 @@ describe Metam::Validation::Minlength do
     validation = Metam::Validation::Minlength.new(instance, 'familyname', '2')
 
     expect(validation).not_to receive(:failed)
+    validation.perform
+  end
+end
+
+describe Metam::Validation::Precision do
+  it 'should pass' do
+    instance = double('user', ratio: '14.222')
+    validation = Metam::Validation::Precision.new(instance, 'ratio', '3')
+
+    expect(validation).not_to receive(:failed)
+    validation.perform
+  end
+
+  it 'should fail' do
+    instance = double('user', ratio: '14.3333')
+    validation = Metam::Validation::Precision.new(instance, 'ratio', '3')
+
+    expect(validation).to receive(:failed).with(:invalid_floating_number_precision)
+    validation.perform
+  end
+end
+
+describe Metam::Validation::Maxvalues do
+  it 'should pass' do
+    instance = double('user', content: 'one, two')
+    validation = Metam::Validation::Maxvalues.new(instance, 'content', '4')
+
+    expect(validation).not_to receive(:failed)
+    validation.perform
+  end
+
+  it 'should fail' do
+    instance = double('user', content: 'one, two, three, four, five')
+    validation = Metam::Validation::Maxvalues.new(instance, 'content', '4')
+
+    expect(validation).to receive(:failed).with(:invalid_maximum_number_of_values)
     validation.perform
   end
 end
