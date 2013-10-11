@@ -1,6 +1,5 @@
 # encoding: utf-8
 require 'nokogiri'
-require 'pry-debugger'
 
 module Metam
   class Store

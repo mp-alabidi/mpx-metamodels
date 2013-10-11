@@ -11,7 +11,7 @@ Gem::Specification.new do |spec|
   spec.email         = ["labidi@mediapeers.com"]
   spec.description   = %q{Dynamic attributes and validators}
   spec.summary       = %q{Dynamic attributes and validators}
-  spec.homepage      = ""
+  spec.homepage      = "https://github.com/mp-alabidi/mpx-metamodels"
   spec.license       = "MIT"
 
   spec.files         = `git ls-files`.split($/)
@@ -32,7 +32,5 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "guard"
   spec.add_development_dependency "guard-rspec"
   spec.add_development_dependency "guard-rubocop"
-  spec.add_development_dependency "debugger"
   spec.add_development_dependency "yard", "~> 0.8.7"
-  spec.add_development_dependency "pry-debugger"
 end
